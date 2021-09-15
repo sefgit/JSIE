@@ -1,7 +1,7 @@
 'use strict'
 
 // Game Level, 0 (easy), 1 (medium), 2 (hard)
-var index = 2; 
+var index = 0; 
 
 var gameData = 
 [
