@@ -1,0 +1,93 @@
+<html>
+<head>
+	<title>UPH Industrial Engineering Simulation</title>
+	<meta name="description" content="UPH Industrial Engineering Simulation">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" href="../res/normalize.css">
+	<link rel="stylesheet" href="../res/default.css">
+	<script src="../res/plain-draggable.min.js"></script>
+	<script src="../res/anime.min.js"></script>
+	<script src="../res/howler.core.min.js"></script>
+	<script src="../res/howler.min.js"></script>
+	<script src="main.js"></script>
+</head>
+<body onselectstart="return false" oncontextmenu="return false">
+<div id="voldiv">VOLUME&nbsp;<input type="range" min="1" max="100" value="60" id="vol"></div>
+<div id="bg" class="bg2"></div>
+<div id="content" class="content">
+<b>JOB-SHOP SCHEDULING</b> - pengenalan dan simulasi
+<div id="btnRules" class="next right" title="cara bermain"></div>
+<hr>
+<b>Teknik Industri</b> merupakan ilmu yang mempelajari proses industri baik dari sisi manajemen ataupun teknik. Berfokus kepada perancangan, peningkatan, dan pemasangan sistem terintegrasi yang membutuhkan peran manusia, material, peralatan dan energi. Teknik Industri sendiri dibagi menjadi tiga bidang besar.<ul><li>Pertama, sistem manufaktur yang mempelajari peningkatan kualitas, produktivitas, dan efisiensi sistem produksi.</li><li>Kedua adalah manajemen industri, di mana para mahasiswa harus mempelajari manajemen keuangan, manajemen operasional, manajemen inovasi, perencanaan dan pengendalian produksi, dan ekonomi teknik.</li><li>Ketiga adalah sistem industri dan tekno ekonomi, seperti logistik, statistik, penelitian operasional, dan sistem basis data.</li>
+</ul>
+Di dalam <b>manajemen operational</b> yang juga dikenal sebagai <i>Operations Research</i>, JOB-SHOP SCHEDULING adalah salah satu topik yang kelihatannya sederhana tetapi ternyata amat sangat penting dan bisa menjadi problem yang nyata dan rumit baik di industri maupun di dalam dunia usaha.
+<br>
+Dalam workshop kali ini, kita akan berkenalan dan mencoba memahami proses JOB-SHOP SCHEDULING tersebut. 
+<br>
+<br>
+Semoga bermanfaat dan <b>menyenangkan</b>.
+</div>
+<div id="rules" class="content">
+<b>JOB-SHOP SCHEDULING</b> - pemahaman dan cara bermain
+<div id="btnStart" class="next right" title="start"></div>
+<hr>
+JOB-SHOP SCHEDULING adalah ilmu <b>penjadwalan tugas/pekerjaan</b> sedemikian rupa untuk meminimumkan keterlambatan, total biaya (termasuk biaya penalti), dan lain sebagainya. 
+<br>JOB-SHOP SCHEDULING dapat diaplikasikan untuk perusahaan manufaktur yang melakukan sistem make to order, seperti pencetakan mold, bengkel bubut, dsb. dan juga dapat digunakan untuk menyelesaikan permasalahan penjadwalan pada bidang jasa.
+<br>
+<br>
+Dalam simulasi ini, kita mencoba "menyusun urutan" tugas / pekerjaan yang disediakan supaya dapat diselesaikan secara efisien secara waktu dan biaya (dengan penalti keterlambatan yang minimal). Selama proses pengerjaan tugas tersebut, kita dihadapkan dengan situasi yang dapat menghambat ataupun mempercepat proses pengerjaan. Jadi harap pertimbangkan dengan baik setiap langkah dan keputusan yang akan diambil nanti.
+<br>
+<br>
+<b>Cara bermain:</b> gerakan "mouse" di area yang sudah ditentukan untuk mensimulasikan pengerjaan tugas. Jaga kecepatan gerak "mouse" untuk mendapatkan hasil yang optimal.
+<br>
+<br>
+Perhatikan bahwa susunan pekerjaan yang sudah ditentukan, tidak dapat diubah lagi. Oleh karena itu, coba pertimbangkan dengan baik, sebelum memulai simulasi ini.
+<br>Hasil akhir dari simulasi dengan <b>biaya terrendah</b> akan menjadi pemenang, karena proses pengerjaannya yang efisien.
+<br>
+<br><b>Selamat mencoba !</b>
+</div>
+<div class="center">
+<div id="stage">
+TUGAS
+<div id="items"></div>
+</div>
+<div id="lane">
+<div id="message">	
+Urutkan TUGAS-TUGAS yang akan diproses dari atas ke bawah secara bertahap. <br>Kemudian klik <b>[PLAY]</b> untuk memulai permainan simulasi ini.<br>
+<br>Gerak-gerakkan 'mouse' di area proses ini untuk menyimulasikan pengerjaan tugas.<br>Perhatikan dan atur "power/stress level" supaya proses dapat berjalan dengan efisien dengan mengatur kecepatan gerakan 'mouse'. Manfaatkan peningkatan <i>Level Keceriaan</i> <b>(+EQ)</b>, <i>Level Kebugaran</i> <b>(+FQ)</b>, dan <i>Level Kecerdasan</i> <b>(+IQ)</b> yang tersedia untuk mempengaruhi proses pengerjaan tersebut.<br><br>Total NILAI AKHIR akan ditampilkan setelah TUGAS-TUGAS selesai diproses.
+<br>
+<br>
+<button id="btnPlay">PLAY</button>
+</div>
+<div id="lanes"></div>
+</div>
+</div>
+<br clear="all">
+</div>
+<div id="player">*guest*</div>
+<img id="avatar" src="../res/3.png" class="smiley">
+<div id="ti"></div>
+<div id="fast"></div>
+<div id="logo"></div>
+<div id="jsp">JOB SHOP SCHEDULING</div>
+<div id="tools">
+</div>
+<div id="welcome"><br><b>WELCOME !</b><br>
+<div id="start">click to start</div>
+<center>
+<div id="clickme">Masukkan nama<br>
+<input type="text" id="nama" value=""/><br>
+kelas<br>
+<input type="text" id="kelas" value=""/><br>
+sekolah<br>
+<input type="text" id="sekolah"/><br>
+<br>
+<button id="submit">OK</button></div></center>
+<div id="copy">&copy; 2021 UPH Karawaci</div>
+<div id="copy2">FaST - Teknik Industri</div>
+</div>
+<div id="point"></div>
+</body>
+</html>
