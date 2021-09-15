@@ -1023,7 +1023,7 @@ window.addEventListener('load', function() {
 	  easing: 'spring(1, 80, 10, 0)'
 	});
 });
-
+/*
 window.addEventListener('keypress', function(e) {
 		fx.pause();
 		fx.stop();
@@ -1047,7 +1047,7 @@ window.addEventListener('keypress', function(e) {
 		else if (e.code == 'Digit6')
 			fx2.play('timeout');
 });
-
+*/
 // EQ: emotion quotient
 // FQ: fitness quotient
 // IQ: intelligence quotient
