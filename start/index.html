@@ -13,7 +13,7 @@
 	<script src="../res/howler.min.js"></script>
 	<script src="main.js"></script>
 </head>
-<body onselectstart="return false" oncontextmenu="return false">
+<body xonselectstart="return false" xoncontextmenu="return false">
 <div id="voldiv">VOLUME&nbsp;<input type="range" min="1" max="100" value="60" id="vol"></div>
 <div id="bg" class="bg2"></div>
 <div id="content" class="content">
@@ -50,7 +50,8 @@ Perhatikan bahwa susunan pekerjaan yang sudah ditentukan, tidak dapat diubah lag
 </div>
 <div class="center">
 <div id="stage">
-TUGAS
+TUGAS<br>
+<br>
 <div id="items"></div>
 </div>
 <div id="lane">
@@ -71,20 +72,34 @@ Urutkan TUGAS-TUGAS yang akan diproses dari atas ke bawah secara bertahap. <br>K
 <div id="ti"></div>
 <div id="fast"></div>
 <div id="logo"></div>
+<div id="inwork"></div>
+<div id="human" class="human"></div>
 <div id="jsp">JOB SHOP SCHEDULING</div>
 <div id="tools">
 </div>
-<div id="welcome"><br><b>WELCOME !</b><br>
-<div id="start">click to start</div>
-<center>
-<div id="clickme">Masukkan nama<br>
-<input type="text" id="nama" value=""/><br>
-kelas<br>
-<input type="text" id="kelas" value=""/><br>
-sekolah<br>
+<div id="welcome">
+<img src="../res/inwork.png">
+<div id="welcome_text"><br><b>WELCOME !</b><br></div>
+<div id="start">
+<br>How do you feel today ?
+<br><br>
+<button id="btn1" data-theme="0">excited</button>&nbsp;&nbsp;
+<button id="btn2" data-theme="1">calm</button>
+<br><br>
+<br>
+<br>
+<br>
+</div>
+<center><div id="clickme">NAMA<br>
+<input type="text" id="nama" value="asd"/><br>
+KELAS<br>
+<input type="text" id="kelas" value="1a"/><br>
+SEKOLAH<br>
 <input type="text" id="sekolah"/><br>
 <br>
-<button id="submit">OK</button></div></center>
+<button id="submit">OK</button>
+<br>
+</div></center>
 <div id="copy">&copy; 2021 UPH Karawaci</div>
 <div id="copy2">FaST - Teknik Industri</div>
 </div>

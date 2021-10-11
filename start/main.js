@@ -77,6 +77,7 @@ function _playAgain()
 	fx2.pause();
 	fx2.stop();
 	bgMusic.stop();
+	bgMusic2.stop();
 	if (idMonitor > 0)
 		clearInterval(idMonitor);
 	idMonitor = 0;
@@ -89,16 +90,25 @@ function _play(ev)
 {
 	toggleFullScreen();
 	totalScores = 0;
-	var el = document.getElementById('bg');
+	var el = document.getElementById('btn1');
 	el.removeEventListener('click', _play);
 	el.removeEventListener('touchend', _play);
-	el.style.zIndex = -1;
+	el = document.getElementById('btn2');
+	el.removeEventListener('click', _play);
+	el.removeEventListener('touchend', _play);
+	el.style.zIndex = 100;
+	el = ev.target;
+	var theme = Number(el.getAttribute('data-theme'));
 	el = document.getElementById('start');
 	el.style.display = 'none';
+	el = document.getElementById('welcome_text');
+	el.innerHTML = '<br>';
 	el = document.getElementById('clickme');
-	el.style.visibility = 'visible';
+	el.style.display = 'block';
+	var himnes = ['../fx/himne2.mp3', '../fx/himne.mp3']
+	var bgs = ['../fx/bg2.mp3', '../fx/bg.mp3']
     bgMusic = new Howl({
-        src: ['../fx/himne.mp3'],
+        src: [himnes[theme]],
         html5: true,
         buffer:true,
         autoplay:false,
@@ -110,7 +120,7 @@ function _play(ev)
 			Howler.volume(0.6);
 			bgMusic.play();
 			bgMusic2 = new Howl({
-				src: ['../fx/bg.mp3'],
+				src: [bgs[theme]],
 				html5: true,
 				buffer:true,
 				autoplay:false,
@@ -174,13 +184,15 @@ function play(ev)
 		fx.play('fail');
 		return;
 	}
+	el = document.getElementById('submit');
+	el.style.display='none';
 	el = document.getElementById('player');
-	el.innerHTML = '<b>' + nama + '</b> ( ' + kelas + (sekolah==""?"":' - ' + sekolah) + ' )';
-	bgMusic.fade(1.0,0,2000);
-	bgMusic2.play();
-	el = document.getElementById('bg');
-	el.removeEventListener('click', play);
-	el.removeEventListener('touchend', play);
+	var s = '<b>' + nama + '</b>';
+	if (kelas != "")
+		s += " (" + kelas + ")";
+	if (sekolah != "")
+		s += "<br><small>" + sekolah + "</small>";
+	el.innerHTML = s;
 	if (ev && ev.shiftKey) 
 	{
 		el = document.getElementById('jsp');
@@ -209,6 +221,8 @@ function play(ev)
 	  complete: function(anim) {
 			var el = document.getElementById('welcome');
 			el.style.display='none';
+			el = document.getElementById('human');
+			el.style.display='none';
 			anime({
 			  targets: '#fast',
 			  translateX: -400,
@@ -217,7 +231,6 @@ function play(ev)
 			  loop: false,
 			  easing: 'linear',
 				complete: function(anim) {
-					bgMusic.stop();
 					anime({
 					  targets: '#ti',
 					  translateY: 40,
@@ -303,9 +316,10 @@ function initGame()
 
 function startGame()
 {
-	avatar.src = '../res/space.png';
 	fx.play('click');
-	var el = document.getElementById('ti');
+	var el = document.getElementById('btnStart');
+	el.style.display='none';
+	el = document.getElementById('ti');
 	el.style.display='block';
 	el = document.getElementById('jsp');
 	el.style.display='block';
@@ -348,6 +362,15 @@ function startGame()
 	  loop: false,
 	  easing: 'linear',
 	  complete: function(anim) {
+		avatar.src = '../res/head.png';
+		avatar.style.display = 'block';
+		avatar.style.zIndex = -1;
+		el = document.getElementById('human');
+		el.className = 'human2';
+		el.style.display='block';
+		el = document.getElementById('logo');
+		el.style.display='block';
+		el.style.opacity=0.5;
 		anime({
 		  targets: '#fast',
 		  translateY: -540,
@@ -356,13 +379,10 @@ function startGame()
 		  loop: false,
 		  easing: 'linear',
 		  complete: function(anim) {
-			el = document.getElementById('logo');
-			el.style.display='block';
-			el.style.opacity=0.3;
 			el = document.getElementById('fast');
 			el.style.opacity=0.8;
 			el = document.getElementById('tools');
-			el.innerHTML = '<div class="bonus" id="eq" title="kecerian">+ E Q</div><div class="bonus" id="fq" title="kebugaran">+ F Q</div><div class="bonus" id="iq" title="kecerdasan">+ I Q</div>';
+			el.innerHTML = '<div class="bonus" id="eq" title="kecerian">E Q</div><div class="bonus" id="fq" title="kebugaran">F Q</div><div class="bonus" id="iq" title="kecerdasan">I Q</div>';
 			el.style.display='block';
 			fx2.play('sort');
 			initGame();
@@ -387,7 +407,9 @@ function startGame()
 function showRules()
 {
 	fx.play('click');
-	var el = document.getElementById('content');
+	var el = document.getElementById('btnRules');
+	el.style.display='none';
+	el = document.getElementById('content');
 	el.style.display='none';
 	el = document.getElementById('rules');
 	el.style.display='block';
@@ -398,7 +420,11 @@ function showRules()
 
 function showIntro()
 {
-	var el = document.getElementById('bg');
+	var el = document.getElementById('inwork');
+	el.style.display='block';
+	el = document.getElementById('human');
+	el.style.display='none';
+	el = document.getElementById('bg');
 	el.style.opacity=0.5;
 	anime({
 	  targets: '#fast',
@@ -421,8 +447,6 @@ function showIntro()
 					fx.play('click');
 					var el = document.getElementById('fast');
 					el.style.opacity=0.2;
-					el = document.getElementById('logo');
-					el.style.display='block';
 					el = document.getElementById('content');
 					el.style.display='block';
 					el.style.opacity=1;
@@ -595,11 +619,14 @@ function simulate()
 {
 	fx2.pause();
 	fx2.stop();
+	bgMusic.fade(1.0,0,2000);
+	bgMusic2.play();
 	curStep = 0;
 	curTstamp = 0;
 	lastX = 0;
 	pos = 0;
 	curLevel = 0;
+	avatar.style.zIndex = 1;
 	avatar.style.display = 'block';
 	var el = document.getElementById('message');
 	el.style.display='none';
@@ -617,19 +644,15 @@ function simulate()
 		task.totalWork = 0;
 		task.startTstamp = 0;
 		task.stopTstamp = 0;
+		task.plannedTstamp = 0;
 		if (days > _max)
 			_max = days;
 	}
 	target = Math.ceil(_max/10) * 5;
-	ticksPerDay = 300 / (target + 1);
-	for(var x in curTasks)
-	{
-		var task = curTasks[x];
-		task.totalWork = task.d * ticksPerDay;
-	}
+	ticksPerDay = Math.ceil(300 / target);
 	var game = games[index];  
 	steps = game.length;
-	var w = Math.ceil(ticksPerDay*2) + "px";	
+	var w = (ticksPerDay*2) + "px";	
 	var s = '<table id="tmain" class="main"><tr><th class="task" rowspan=2>TUGAS</th>';
 	for(var n=0; n<target; n++)
 	{
@@ -637,19 +660,22 @@ function simulate()
 		s += '</th>';
 	}
 	s += '<th rowspan=2 width="100%">+ poin</th></tr>';
-	s += '<tr><th id="ticks" colspan='+target+'>&nbsp;</th></tr>';
+	s += '<tr><th id="ticks" colspan='+target+' style="line-height:2px">&nbsp;</th></tr>';
 
 	for(var x in items) 
 	{
-		s += '<tr id="task'+x+'" class="on"><td id="t'+x+'" class="task">&nbsp;&nbsp;'+items[x].element.innerHTML+'</td>';
+		s += '<tr id="task'+x+'" class="on"><td rowspan=4 id="t'+x+'" class="task">&nbsp;&nbsp;'+items[x].element.innerHTML+'</td>';
 		for(var n=0; n < target; n++)
 		{
 			s += '<td>&nbsp;</td>';
 		}
-		s += '<td id="d'+x+'" class="score">&nbsp;</td>';
-		s += '</tr>';
+		s += '<td rowspan=4 id="d'+x+'" class="score">&nbsp;</td></tr>';
+		s += '<tr><td id="ref'+x+'" colspan='+target+' class="ron">&nbsp;</td></tr>';		
+		s += '<tr><td id="plan'+x+'" colspan='+target+' class="pon">&nbsp;</td></tr>';		
+		s += '<tr><td id="real'+x+'" colspan='+target+' class="ton">&nbsp;</td></tr>';
 	}
 	s+= '<tr><td colspan='+(target+2)+'><div id="panel">POWER&nbsp;<div id="power"><div id="level"></div></div>&nbsp;STRESS</td></tr></table>';
+	
 	el = document.getElementById('stage');
 	el.style.display = 'none';
 	el = document.getElementById('lanes');
@@ -657,6 +683,26 @@ function simulate()
 	el.style.display = 'inline-block';
 	if (timerID) 
 		clearInterval();
+	var p = 0;
+	for(var x in curTasks)
+	{
+		var taskId = items[x].element.dataset.idx;
+		var task = curTasks[taskId];
+		task.totalWork = task.d * ticksPerDay;
+		var wx = task.totalWork + 'px 100%';
+		var id = 'ref'+x;
+		el = document.getElementById(id);
+		var id2 = 'plan'+x;
+		var el2 = document.getElementById(id2);
+		task.plannedTstamp = p;
+		var px = p + 'px 0';
+		el.style.backgroundPosition = px;
+		el.style.backgroundSize = wx;
+		el2.style.backgroundPosition = px;
+		el2.style.backgroundSize = wx;
+		p += task.totalWork;
+	}
+		
 	level = document.getElementById('level');
 	level.style.display = 'block';
 	level.style.marginLeft = pos + "%";
@@ -694,7 +740,11 @@ function simulate()
 
 function nextLevel()
 {
-	avatar.src = '../res/space.png';
+	fx2.pause();
+	fx2.stop();
+	bgMusic.stop();
+	bgMusic2.stop();
+	avatar.src = '../res/head.png';
 	index += 1;
 	if (index > 2)
 	   index = 0;
@@ -714,7 +764,7 @@ function loadHighScore()
 }
 function submitScore()
 {
-	avatar.src = '../res/space.png';
+	avatar.src = '../res/head.png';
 	var	xhr = new XMLHttpRequest();
 	xhr.onload = function(data) {
 		var el = document.getElementById('lanes');
@@ -751,10 +801,11 @@ function showScores()
 		var task = curTasks[taskId];
 		if (task.work >= task.totalWork)
 		{
-			// task completed
-			score = Math.round((1.0 - (task.stopTstamp - task.startTstamp) / task.totalWork) * 100) + 100;
-			// task on schedule
-			var delta = (task.H * ticksPerDay) - task.stopTstamp;
+			// task completed (d days)
+			score = Math.round((Math.round((task.stopTstamp - task.startTstamp)/10)*10) / task.totalWork) * 100;
+			// 
+			// task on schedule (H + days)
+			var delta = Math.round(task.H * ticksPerDay) - task.stopTstamp;
 			if (delta < 0)
 				delta = delta * 10;
 			score += Math.round(delta);				
@@ -776,7 +827,7 @@ function showScores()
 			{
 				found = true;
 				el.style.visibility = 'hidden';
-				totalScores += 50;
+				totalScores += 50; // each bonus 50 points
 				fx.play('click');
 				break;
 			}
@@ -823,7 +874,7 @@ function gameDone()
 {
 	var el;
 	clearInterval(timerID);
-	avatar.src = '../res/space.png';
+	avatar.src = '../res/head.png';
 	timerID = 0;
 	curStep = 0;
 	fx.pause();
@@ -901,26 +952,49 @@ function gameLoop()
 				fx2.play('hurry');
 			}
 		}
-		if ((curTask.work >= curTask.totalWork) && (curStep < steps))
-		{			
-			curTask.stopTstamp = curTstamp;
-			curStep += 1;
-			if (curStep < steps)
-			{
-				_late = false;
-				taskId = items[curStep].element.dataset.idx;
-				curTask = curTasks[taskId];				
-				curTask.startTstamp = curTstamp;
-				id = 'task'+curStep;
-				w = (xOffset + curTstamp) + 'px 0';
-				el = document.getElementById(id);
-				el.style.backgroundPosition = w;
-				//gameDone();
-			}
-			else
-			{
-				gameDone();
-				return;
+		if (curStep < steps)
+		{
+			taskId = items[curStep].element.dataset.idx;
+			curTask = curTasks[taskId];				
+			
+			var wx = (curTstamp - curTask.startTstamp) + 'px 100%';
+			var id = 'real'+curStep;
+			el = document.getElementById(id);
+			var px = curTask.startTstamp + 'px 0';
+			el.style.backgroundPosition = px;
+			el.style.backgroundSize = wx;
+			if (curTask.work >= curTask.totalWork)
+			{			
+				curTask.stopTstamp = curTstamp;
+				var diff = curTstamp - (curTask.startTstamp + curTask.totalWork);
+				curStep += 1;
+				if (curStep < steps)
+				{
+					_late = false;
+					taskId = items[curStep].element.dataset.idx;
+					curTask = curTasks[taskId];				
+					curTask.startTstamp = curTstamp;
+					id = 'task'+curStep;
+					w = (xOffset + curTstamp) + 'px 0';
+					el = document.getElementById(id);
+					el.style.backgroundPosition = w;
+					// update planned schedule
+					for(var z = curStep; z < steps; z++) 
+					{
+						var tId = items[z].element.dataset.idx;
+						var task = curTasks[tId];				
+						task.plannedTstamp += diff;
+						var pz = task.plannedTstamp + 'px 0';
+						var idz = 'ref'+z;
+						var elz = document.getElementById(idz);
+						elz.style.backgroundPosition = pz;
+					}
+				}
+				else
+				{
+					gameDone();
+					return;
+				}
 			}
 		}
 	}
@@ -1006,13 +1080,19 @@ function gameLoop()
 // start here
 window.addEventListener('load', function() {
 	var el = document.getElementById('bg');
+	el.style.zIndex = -1;
+	el = document.getElementById('btn1');
 	el.addEventListener('click', _play);
-	el.addEventListener('touchend', _play);			
+	el.addEventListener('touchend', _play);
+	el = document.getElementById('btn2');
+	el.addEventListener('click', _play);
+	el.addEventListener('touchend', _play);
 	el = document.getElementById('vol');
 	el.addEventListener('change', function(e) {
 		Howler.volume(this.value/100);
 	});	
 	avatar = document.getElementById('avatar');
+	/*
 	avatar.style.display = 'block';
 	anime({
 	  targets: '#avatar',
@@ -1022,6 +1102,7 @@ window.addEventListener('load', function() {
 	  loop: true,
 	  easing: 'spring(1, 80, 10, 0)'
 	});
+	*/
 });
 /*
 window.addEventListener('keypress', function(e) {
