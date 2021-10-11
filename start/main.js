@@ -1,7 +1,7 @@
 'use strict'
 
 // Game Level, 0 (easy), 1 (medium), 2 (hard)
-var index = 0; 
+var index = 2; 
 
 var gameData = 
 [
@@ -781,7 +781,9 @@ function submitScore()
 			idMonitor = setInterval(loadHighScore, 5000);
 		}		
 	};
-	var id = nama + ' ( ' + kelas + (sekolah==""?"":' - ' + sekolah) + ' )';
+	var d = new Date();
+	var ds = d.toLocaleDateString('en-US', {month: 'short', day: 'numeric'});
+	var id = ds + ' ' + nama + ' ( ' + kelas + (sekolah==""?"":' - ' + sekolah) + ' )';
 	var query = submitLeaderBoard;
 	query += '&newnum=' + encodeURIComponent(totalScores);
 	query += '&newtext=' + encodeURIComponent(id);
