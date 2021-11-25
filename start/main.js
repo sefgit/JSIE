@@ -13,8 +13,10 @@ var gameData =
 	[{'d':2, 'H':2},{'d':1, 'H':4},{'d':3, 'H':10},{'d':1, 'H':9},{'d':2, 'H':14},{'d':2, 'H':17},{'d':1, 'H':3},{'d':4, 'H':22}]
 ];
 
-var viewLeaderBoard = 'https://cluelabs.com/stencil/display/widget-table-display?chart=MTIxMXwyNjAxfGNmMzE0ZTM4OGI2NzNhNzZmNDQzOTQ2ZTg0OTkxZDVk';
-var submitLeaderBoard = 'https://cluelabs.com/stencil/display/widget-table-save-row?chart=MTIxMXwyNjAxfGNmMzE0ZTM4OGI2NzNhNzZmNDQzOTQ2ZTg0OTkxZDVk';
+var viewLeaderBoard = 'https://cluelabs.com/stencil/display/widget-table-display?chart=MTI3NnwyNzc3fDdiNWY3ZTlkYjVjN2VkNWZhYTJiNGExZjZhMDllYTFh';
+var submitLeaderBoard = 'https://cluelabs.com/stencil/display/widget-table-save-row?chart=MTI3NnwyNzc3fDdiNWY3ZTlkYjVjN2VkNWZhYTJiNGExZjZhMDllYTFh';
+//var viewLeaderBoard = 'https://cluelabs.com/stencil/display/widget-table-display?chart=MTIxMXwyNjAxfGNmMzE0ZTM4OGI2NzNhNzZmNDQzOTQ2ZTg0OTkxZDVk';
+//var submitLeaderBoard = 'https://cluelabs.com/stencil/display/widget-table-save-row?chart=MTIxMXwyNjAxfGNmMzE0ZTM4OGI2NzNhNzZmNDQzOTQ2ZTg0OTkxZDVk';
 
 /* global variables 
  * do not edit after this line
