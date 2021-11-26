@@ -6,6 +6,8 @@
 This educational game serves the purpose to educate K-12 about Job-Shop Scheduling Problem which is studied in Industrial Engineering - Operational Research.
 Have fun learning and playing.
 
+Visit https://sefgit.github.io/JSIE/
+
 Disclaimer:
 
 For educational purposes only.
